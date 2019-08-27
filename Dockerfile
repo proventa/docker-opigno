@@ -16,3 +16,4 @@ RUN cd /opt/opigno/web && composer require drush/drush
 RUN ln -s /opt/opigno/vendor/bin/drush /usr/local/bin
 RUN chown -R www-data:www-data /opt/opigno
 RUN cd /var/www && rm -r html && ln -s /opt/opigno/web html
+RUN composer clearcache
