@@ -1,0 +1,67 @@
+#!/bin/sh
+drush_args=""
+
+set -e
+
+if [ -n "$DRUPAL_DB_URL" ]; then
+  drush_args="${drush_args} --db-url=$DRUPAL_DB_URL"
+fi
+ 
+if [ -n "$DRUPAL_DB_PREFIX" ]; then
+  drush_args="${drush_args} --db-prefix=$DRUPAL_DB_PREFIX"
+fi
+ 
+if [ -n "$DRUPAL_DB_SU" ]; then
+  drush_args="${drush_args} --db-su=$DRUPAL_DB_SU"
+fi
+ 
+if [ -n "$DRUPAL_DB_SU_PW" ]; then
+  drush_args="${drush_args} --db-su-pw=$DRUPAL_DB_SU_PW"
+fi
+ 
+if [ -n "$DRUPAL_ACCOUNT_NAME" ]; then
+  drush_args="${drush_args} --account-name=$DRUPAL_ACCOUNT_NAME"
+fi
+
+if [ -n "$DRUPAL_ACCOUNT_MAIL" ]; then
+  drush_args="${drush_args} --account-mail=$DRUPAL_ACCOUNT_MAIL"
+fi
+ 
+if [ -n "$DRUPAL_SITE_MAIL" ]; then
+  drush_args="${drush_args} --site-mail=$DRUPAL_SITE_MAIL"
+fi
+ 
+if [ -n "$DRUPAL_ACCOUNT_PASS" ]; then
+  drush_args="${drush_args} --account-pass=$DRUPAL_ACCOUNT_PASS"
+fi
+ 
+if [ -n "$DRUPAL_LOCALE" ]; then
+  drush_args="${drush_args} --locale=$DRUPAL_LOCALE"
+fi
+
+if [ -n "$DRUPAL_SITE_NAME" ]; then
+  drush_args="${drush_args} --site-name=$DRUPAL_SITE_NAME"
+fi
+ 
+if [ -n "$DRUPAL_SITE_PASS" ]; then
+  drush_args="${drush_args} --site-pass=$DRUPAL_SITE_PASS"
+fi
+ 
+if [ -n "$DRUPAL_SITES_SUBDIR" ]; then
+  drush_args="${drush_args} --sites-subdir=$DRUPAL_SITES_SUBDIR"
+fi
+ 
+if [ -n "$DRUPAL_CONFIG_DIR" ]; then
+  drush_args="${drush_args} --config-dir=$DRUPAL_CONFIG_DIR"
+fi
+ 
+if [ -n "$DRUPAL_EXISTING_CONFIG" ]; then
+  drush_args="${drush_args} --existing-config"
+fi
+
+if [ -n "$drush_args" ]; then
+  echo "calling drush site-install $drush_args"
+  drush site-install $drush_args
+fi
+
+/usr/local/bin/docker-php-entrypoint "$@"
