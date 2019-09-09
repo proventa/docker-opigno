@@ -5,6 +5,12 @@ set -e
 
 if [ -n "$DRUPAL_DB_URL" ]; then
   drush_args="${drush_args} --db-url=$DRUPAL_DB_URL"
+  case $DRUPAL_DB_URL in
+    sqlite*)
+      apt-get update
+      apt-get install -y sqlite3
+    ;;
+  esac
 fi
  
 if [ -n "$DRUPAL_DB_PREFIX" ]; then
