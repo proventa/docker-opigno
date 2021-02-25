@@ -1,4 +1,4 @@
-FROM drupal:apache
+FROM drupal:8.9.13-php7.4-apache
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apt-get update
